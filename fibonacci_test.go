@@ -42,18 +42,18 @@ func TestInitSequence(t *testing.T) {
 
 func TestParameterCheck(t *testing.T) {
 	// Check negative integer
-	if parameterCheck(-1) == nil {
+	if parameterCheck(-1, MAXNUMBER) == nil {
 		t.Error("Negative number shall not be allowed!\n")
 	}
 
 	//Check big integer
-	if parameterCheck(MAXNUMBER) == nil {
+	if parameterCheck(MAXNUMBER, MAXNUMBER-1) == nil {
 		t.Error("Big integar shall not be supported!\n")
 	}
 
 	//Check allowed integer
-	for i := 0; i < MAXNUMBER; i++ {
-		if parameterCheck(i) != nil {
+	for i := 0; i <= MAXNUMBER; i++ {
+		if parameterCheck(i, MAXNUMBER) != nil {
 			t.Errorf("Value %v shall be allowed!\n", i)
 		}
 	}
@@ -66,17 +66,25 @@ func TestGetFobinacciSequence(t *testing.T) {
 	}
 
 	// Check big integer
-	if _, err := getFibonacciSequence(MAXNUMBER); err == nil {
+	if _, err := getFibonacciSequence(MAXNUMBER+1); err == nil {
 		t.Error("Big integar shall not be supported!\n")
 	}
 
+	fs, err := getFibonacciSequence(0)
+	if err != nil {
+		t.Errorf("Value %v shall be allowed!\n", 0)
+	}
+	if len(fs) != 0 {
+		t.Errorf("Empty arrary shall be returned for number 0")
+	}
+
 	// Check every allowed fibonacci sequence
-	for i := 0; i < MAXNUMBER; i++ {
+	for i := 1; i <= MAXNUMBER; i++ {
 		fs, err := getFibonacciSequence(i)
 		if err != nil {
 			t.Errorf("Value %v shall be allowed!\n", i)
 		}
-		checkFibonacciSequence(t, fs, i+1)
+		checkFibonacciSequence(t, fs, i)
 	}
 }
 

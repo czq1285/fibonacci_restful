@@ -8,7 +8,7 @@ Fibonacci_restful is a RESTful API implementation for fetching Fibonacci numbers
 Here are some examples:
 
 	$ curl http://127.0.0.1:1234/fibonaccisequence/5
-	[0 1 1 2 3 5]
+	[0 1 1 2 3]
 	$ curl http://127.0.0.1:1234/fibonaccinumber/5
 	5
 

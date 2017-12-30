@@ -10,7 +10,7 @@ var handlerTestString = []struct {
 	path, body string
 }{
 	{"/", "Welcome!"},
-	{"/fibonaccisequence/10", "[0 1 1 2 3 5 8 13 21 34 55]"},
+	{"/fibonaccisequence/10", "[0 1 1 2 3 5 8 13 21 34]"},
 	{"/fibonaccisequence/abc", "Invaid request parameter:  abc, shall be an integer"},
 	{"/fibonaccisequence/-10", "Get fibonacci sequence failed: Invalid fibonacci number!" +
 		" Negative number is not allowed."},

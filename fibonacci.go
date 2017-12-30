@@ -36,14 +36,14 @@ func initFibonacciSequence() {
 }
 
 // Check the parameter is valid or not
-func parameterCheck(n int) error {
+func parameterCheck(n, max int) error {
 	// Check the request number, it shall not be a negative number or larger than 93.
 	switch {
 	case n < 0:
 		log.WithField("Number", n).Warn("Negative number received")
 		return errors.New("Invalid fibonacci number! Negative number is not allowed.")
-	case n >= MAXNUMBER:
-		log.WithField("Number", n).Warn("Big number received")
+	case n > max:
+		log.WithField("Number", n).Warnf("Maximum number %v exceeded!", max)
 		return errors.New("This fibonacci number is not supported so far. Please try smaller number.")
 	}
 	return nil
@@ -52,21 +52,21 @@ func parameterCheck(n int) error {
 // Get the fibonacci sequence by number
 func getFibonacciSequence(n int) ([]uint64, error) {
 	// Check the parameter is valid or not
-	if err := parameterCheck(n); err != nil {
+	if err := parameterCheck(n, MAXNUMBER); err != nil {
 		return nil, err
 	}
 
 	log.WithFields(log.Fields{
 		"Number": n,
-		"Result": fibonacciSequence[:n+1],
+		"Result": fibonacciSequence[:n],
 	}).Debug("Get fibonacci sequence success.")
-	return fibonacciSequence[:n+1], nil
+	return fibonacciSequence[:n], nil
 }
 
 // Get the fibonacci number
 func getFibonacciNumber(n int) (uint64, error) {
 	// Check the parameter is valid or not
-	if err := parameterCheck(n); err != nil {
+	if err := parameterCheck(n, MAXNUMBER-1); err != nil {
 		return 0, err
 	}
 
