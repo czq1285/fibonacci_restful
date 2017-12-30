@@ -5,6 +5,7 @@ package main
 
 import (
 	"errors"
+	log "github.com/sirupsen/logrus"
 )
 
 
@@ -17,6 +18,7 @@ const MAXNUMBER = 94
 
 // Initialize the static fibonacci number
 func initFibonacciSequence() {
+	log.Debug("Start to init static fibonacci sequence")
 	fibonacciSequence = make([]uint64, MAXNUMBER)
 	for i := 0; i < MAXNUMBER; i++{
 		switch i {
@@ -29,6 +31,7 @@ func initFibonacciSequence() {
 			fibonacciSequence[i] = fibonacciSequence[i-2] + fibonacciSequence[i-1]
 		}
 	}
+	log.WithField("Length", len(fibonacciSequence)).Debug("Init static fibonacci sequence finished")
 }
 
 // Check the parameter is valid or not
@@ -36,8 +39,10 @@ func parameterCheck(n int) error {
 	// Check the request number, it shall not be a negative number or larger than 93.
 	switch {
 	case n < 0:
+		log.WithField("Number", n).Warn("Negative number received")
 		return errors.New("Invalid fibonacci number! Negative number is not allowed.")
 	case n >= MAXNUMBER:
+		log.WithField("Number", n).Warn("Big number received")
 		return errors.New("This fibonacci number is not supported so far. Please try smaller number.")
 	}
 	return nil
@@ -50,6 +55,10 @@ func getFibonacciSequence (n int) ([]uint64, error) {
 		return nil, err
 	}
 
+	log.WithFields(log.Fields{
+		"Number" : n,
+		"Result" : fibonacciSequence[:n+1],
+	}).Debug("Get fibonacci sequence success.")
 	return fibonacciSequence[:n+1], nil
 }
 
@@ -60,6 +69,10 @@ func getFibonacciNumber (n int) (uint64, error) {
 		return 0, err
 	}
 
+	log.WithFields(log.Fields{
+		"Number" : n,
+		"Result" : fibonacciSequence[n],
+	}).Debug("Get fibonacci number success.")
 	return fibonacciSequence[n], nil
 }
 
