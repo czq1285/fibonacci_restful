@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func checkFibonacciSequence (t *testing.T, fs []uint64, n int){
+func checkFibonacciSequence(t *testing.T, fs []uint64, n int) {
 
 	// Check the sequence is nil or not
 	if fs == nil {
@@ -28,7 +28,7 @@ func checkFibonacciSequence (t *testing.T, fs []uint64, n int){
 				t.Errorf("Wrong fibonacciSequence number: %v, it shall be: v%!\n", v, 1)
 			}
 		default:
-			expected := fs[i - 2] + fs[i - 1]
+			expected := fs[i-2] + fs[i-1]
 			if v := fs[i]; v != expected {
 				t.Errorf("Wrong fibonacciSequence number: %v, it shall be: v%!\n", v, expected)
 			}
@@ -36,11 +36,11 @@ func checkFibonacciSequence (t *testing.T, fs []uint64, n int){
 	}
 }
 
-func TestInitSequence(t *testing.T){
+func TestInitSequence(t *testing.T) {
 	checkFibonacciSequence(t, fibonacciSequence, MAXNUMBER)
 }
 
-func TestParameterCheck(t *testing.T){
+func TestParameterCheck(t *testing.T) {
 	// Check negative integer
 	if parameterCheck(-1) == nil {
 		t.Error("Negative number shall not be allowed!\n")
@@ -59,7 +59,7 @@ func TestParameterCheck(t *testing.T){
 	}
 }
 
-func TestGetFobinacciSequence(t *testing.T){
+func TestGetFobinacciSequence(t *testing.T) {
 	// Check negative integer
 	if _, err := getFibonacciSequence(-1); err == nil {
 		t.Error("Negative number shall not be allowed!\n")
@@ -80,7 +80,7 @@ func TestGetFobinacciSequence(t *testing.T){
 	}
 }
 
-func TestGetFobinacciNumber(t *testing.T){
+func TestGetFobinacciNumber(t *testing.T) {
 	// Check negative integer
 	if _, err := getFibonacciNumber(-1); err == nil {
 		t.Error("Negative number shall not be allowed!\n")
@@ -99,7 +99,7 @@ func TestGetFobinacciNumber(t *testing.T){
 		if err != nil {
 			t.Errorf("Value %v shall be allowed!\n", i)
 		}
-		fs[i]=n
+		fs[i] = n
 	}
 	checkFibonacciSequence(t, fs, MAXNUMBER)
 }

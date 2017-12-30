@@ -8,7 +8,6 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-
 // A static variable to store the pre-generated fibonacci sequence.
 var fibonacciSequence []uint64
 
@@ -20,12 +19,14 @@ const MAXNUMBER = 94
 func initFibonacciSequence() {
 	log.Debug("Start to init static fibonacci sequence")
 	fibonacciSequence = make([]uint64, MAXNUMBER)
-	for i := 0; i < MAXNUMBER; i++{
+	for i := 0; i < MAXNUMBER; i++ {
 		switch i {
 		// fibonacci[0] = 0
-		case 0: fibonacciSequence[i] = 0
+		case 0:
+			fibonacciSequence[i] = 0
 		// fibonacci[1] = 1
-		case 1: fibonacciSequence[i] = 1
+		case 1:
+			fibonacciSequence[i] = 1
 		// fibonacci[n] = fibonacci[n-2] + fibonacci[n-1]
 		default:
 			fibonacciSequence[i] = fibonacciSequence[i-2] + fibonacciSequence[i-1]
@@ -49,33 +50,32 @@ func parameterCheck(n int) error {
 }
 
 // Get the fibonacci sequence by number
-func getFibonacciSequence (n int) ([]uint64, error) {
+func getFibonacciSequence(n int) ([]uint64, error) {
 	// Check the parameter is valid or not
 	if err := parameterCheck(n); err != nil {
 		return nil, err
 	}
 
 	log.WithFields(log.Fields{
-		"Number" : n,
-		"Result" : fibonacciSequence[:n+1],
+		"Number": n,
+		"Result": fibonacciSequence[:n+1],
 	}).Debug("Get fibonacci sequence success.")
 	return fibonacciSequence[:n+1], nil
 }
 
 // Get the fibonacci number
-func getFibonacciNumber (n int) (uint64, error) {
+func getFibonacciNumber(n int) (uint64, error) {
 	// Check the parameter is valid or not
 	if err := parameterCheck(n); err != nil {
 		return 0, err
 	}
 
 	log.WithFields(log.Fields{
-		"Number" : n,
-		"Result" : fibonacciSequence[n],
+		"Number": n,
+		"Result": fibonacciSequence[n],
 	}).Debug("Get fibonacci number success.")
 	return fibonacciSequence[n], nil
 }
-
 
 // Init the fibonacci sequence during system start
 func init() {

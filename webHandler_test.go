@@ -1,10 +1,10 @@
 package main
 
 import (
-	"testing"
+	"github.com/julienschmidt/httprouter"
 	"net/http"
 	"net/http/httptest"
-	"github.com/julienschmidt/httprouter"
+	"testing"
 )
 
 var router *httprouter.Router
@@ -15,12 +15,12 @@ var handlerTestString = []struct {
 	{"/", "Welcome!"},
 	{"/fibonaccisequence/10", "[0 1 1 2 3 5 8 13 21 34 55]"},
 	{"/fibonaccisequence/abc", "Invaid request parameter:  abc, shall be an integer"},
-	{"/fibonaccisequence/-10","Get fibonacci sequence failed: Invalid fibonacci number!" +
-	" Negative number is not allowed."},
+	{"/fibonaccisequence/-10", "Get fibonacci sequence failed: Invalid fibonacci number!" +
+		" Negative number is not allowed."},
 	{"/fibonaccinumber/10", "55"},
 	{"/fibonaccinumber/abc", "Invaid request parameter:  abc, shall be an integer"},
 	{"/fibonaccinumber/-10", "Get fibonacci number failed: Invalid fibonacci number! " +
-	"Negative number is not allowed."},
+		"Negative number is not allowed."},
 }
 
 func TestHandlers(t *testing.T) {
@@ -47,7 +47,6 @@ func TestHandlers(t *testing.T) {
 		}
 	}
 }
-
 
 func init() {
 	router = initRouter()

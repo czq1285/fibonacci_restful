@@ -9,13 +9,12 @@
 package main
 
 import (
-	"net/http"
-	"github.com/julienschmidt/httprouter"
 	"fmt"
-	"strconv"
+	"github.com/julienschmidt/httprouter"
 	log "github.com/sirupsen/logrus"
+	"net/http"
+	"strconv"
 )
-
 
 // Welcome Page
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -71,7 +70,7 @@ func FibonacciNumberHandler(w http.ResponseWriter, r *http.Request, ps httproute
 // Init http router and bind the handlers to it
 func initRouter() *httprouter.Router {
 	router := httprouter.New()
-	if (router == nil) {
+	if router == nil {
 		log.Fatal("Can not create http router!")
 	}
 
@@ -81,8 +80,8 @@ func initRouter() *httprouter.Router {
 	return router
 }
 
-func main (){
-	router :=  initRouter()
+func main() {
+	router := initRouter()
 	log.Fatal(http.ListenAndServe(":1234", router))
 
 }

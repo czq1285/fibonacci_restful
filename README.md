@@ -12,7 +12,7 @@ Here are some examples:
 	$ curl http://127.0.0.1:1234/fibonaccinumber/5
 	5
 
-##Build
+## Build
 
 fibonacci_restful is implemented by Go language. You can fetch it via `go get` command
 
@@ -29,7 +29,7 @@ Then this project could be built and run:
 	$ go build
 	$ ./fibonacci_restful
 
-##Test
+## Test
 
 The project provides two kinds of test cases, unit test cases and functinal test cases.
 

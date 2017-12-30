@@ -1,25 +1,24 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 )
 
 var handlerTestString = []struct {
 	path, body string
 }{
 	{"/", "Welcome!"},
-	{"/fibonaccisequence/10",  "[0 1 1 2 3 5 8 13 21 34 55]"},
+	{"/fibonaccisequence/10", "[0 1 1 2 3 5 8 13 21 34 55]"},
 	{"/fibonaccisequence/abc", "Invaid request parameter:  abc, shall be an integer"},
-	{"/fibonaccisequence/-10","Get fibonacci sequence failed: Invalid fibonacci number!" +
+	{"/fibonaccisequence/-10", "Get fibonacci sequence failed: Invalid fibonacci number!" +
 		" Negative number is not allowed."},
 	{"/fibonaccinumber/10", "55"},
 	{"/fibonaccinumber/abc", "Invaid request parameter:  abc, shall be an integer"},
 	{"/fibonaccinumber/-10", "Get fibonacci number failed: Invalid fibonacci number! " +
 		"Negative number is not allowed."},
 }
-
 
 func TestGetOKPages() {
 	for _, v := range handlerTestString {
@@ -59,7 +58,7 @@ func TestGetOKPages() {
 func TestPostPages() {
 	for _, v := range handlerTestString {
 		fmt.Printf("Testing POST \"%v\" page ... ", v.path)
-		resp, err := http.Post("http://127.0.0.1:1234" + v.path, "", nil)
+		resp, err := http.Post("http://127.0.0.1:1234"+v.path, "", nil)
 		if err != nil {
 			fmt.Println("failed: can not get the response")
 			continue
