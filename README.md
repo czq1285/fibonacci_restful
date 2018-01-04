@@ -18,31 +18,47 @@ fibonacci_restful is implemented by Go language. You can fetch it via `go get` c
 
 	$ go get github.com/czq1285/fibonacci_restful
 
-fibnacci_restful use [httprouter](https://github.com/julienschmidt/httprouter) as the http request router and [logrus](https://github.com/sirupsen/logrus) as the logger. To build the project, these two pakcages shall be fetched as well.
+fibnacci_restful use [httprouter](https://github.com/julienschmidt/httprouter) as the http request router and [logrus](https://github.com/sirupsen/logrus) as the logger. These two pakcages are fetched by default during building the package.
 
-	$ go get github.com/julienschmidt/httprouter
-	$ go get github.com/sirupsen/logrus
+	$ make
+	github.com/julienschmidt/httprouter (download)
+	github.com/sirupsen/logrus (download)
+	github.com/julienschmidt/httprouter
+	github.com/sirupsen/logrus
+	go build -o ./fibonacci_restful 
 
-Then this project could be built and run:
+Then this project could be started and stopped via the make command:
 
-	$ cd github.com/czq1285/fibonacci_restful
-	$ go build
-	$ ./fibonacci_restful
+	$ make run
+	$ make stop
 
 ## Test
 
-The project provides two kinds of test cases, unit test cases and functinal test cases.
+The project provides two kinds of test cases, unit test cases and functinal test cases. These tests cases could be run via the make command:
 
 To run unit tests:
 
-	$ go test
+	$ make ut
+	go test -cover -v
+	=== RUN   TestInitSequence
+	--- PASS: TestInitSequence (0.00s)
+	=== RUN   TestParameterCheck
+	--- PASS: TestParameterCheck (0.00s)
+	=== RUN   TestGetFobinacciSequence
+	--- PASS: TestGetFobinacciSequence (0.00s)
+	=== RUN   TestGetFobinacciNumber
+	--- PASS: TestGetFobinacciNumber (0.00s)
+	=== RUN   TestHandlers
+	--- PASS: TestHandlers (0.00s)
 	PASS
-	ok  	github.com/czq1285/fibonacci_restful	0.020s
+	coverage: 95.2% of statements
+	ok  	github.com/czq1285/fibonacci_restful	0.021s
 
 To run functional tests: (fibonacci_restful shall be started firstly):
 
-	$ cd function_test/
-	$ go run fibonacci_restful_suite.go 
+	$ make ft
+	go build -o ./function_test 
+	./function_test
 	Testing GET "/" page ... passed!
 	Testing GET "/fibonaccisequence/10" page ... passed!
 	Testing GET "/fibonaccisequence/abc" page ... passed!
@@ -57,5 +73,6 @@ To run functional tests: (fibonacci_restful shall be started firstly):
 	Testing POST "/fibonaccinumber/10" page ... passed!
 	Testing POST "/fibonaccinumber/abc" page ... passed!
 	Testing POST "/fibonaccinumber/-10" page ... passed!
+	go clean
 
 
