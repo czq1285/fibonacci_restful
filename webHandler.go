@@ -89,5 +89,5 @@ func main() {
 func init() {
 	//Todo: move the log to a file instead of stderr
 	//log.SetOutput()
-	log.SetLevel(log.WarnLevel)
+	log.SetLevel(log.ErrorLevel)
 }
